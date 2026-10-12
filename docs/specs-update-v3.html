@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>how-to-live-better-mirror-982 架构升级与技术规约 (v3) - how-to-live-better-mirror-982 文档归档</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      :root {
+        --color-primary: #2563eb;
+        --color-primary-hover: #1d4ed8;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.68;
+        color: #1e293b;
+      }
+      .markdown-body {
+        color: #1e293b;
+      }
+      .markdown-body h1 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin-top: 1.8rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 2px solid #e2e8f0;
+        color: #0f172a;
+        line-height: 1.25;
+      }
+      .markdown-body h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 1.6rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #f1f5f9;
+        color: #1e293b;
+      }
+      .markdown-body h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.3rem;
+        margin-bottom: 0.6rem;
+        color: #334155;
+      }
+      .markdown-body p {
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.7;
+      }
+      .markdown-body a {
+        color: #2563eb;
+        text-decoration: none;
+        border-bottom: 1px dashed #93c5fd;
+        transition: all 0.2s ease;
+      }
+      .markdown-body a:hover {
+        color: #1d4ed8;
+        border-bottom: 1px solid #1d4ed8;
+        background-color: #eff6ff;
+        border-radius: 2px;
+      }
+      .markdown-body ul, .markdown-body ol {
+        padding-left: 1.5rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.6rem;
+      }
+      .markdown-body ul {
+        list-style-type: disc;
+      }
+      .markdown-body ol {
+        list-style-type: decimal;
+      }
+      .markdown-body li {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+      .markdown-body pre {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem 1.2rem;
+        border-radius: 0.75rem;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .markdown-body code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875em;
+        padding: 0.15rem 0.35rem;
+        background-color: #f1f5f9;
+        color: #0f172a;
+        border-radius: 0.35rem;
+        border: 1px solid #e2e8f0;
+      }
+      .markdown-body pre code {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        color: inherit;
+      }
+      .markdown-body blockquote {
+        margin: 1rem 0;
+        padding: 0.75rem 1.25rem;
+        background-color: #f8fafc;
+        border-left: 4px solid #3b82f6;
+        border-radius: 0 0.5rem 0.5rem 0;
+        color: #475569;
+      }
+      .markdown-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        display: block;
+        overflow-x: auto;
+      }
+      .markdown-body th, .markdown-body td {
+        border: 1px solid #cbd5e1;
+        padding: 0.6rem 1rem;
+        text-align: left;
+      }
+      .markdown-body th {
+        background-color: #f1f5f9;
+        font-weight: 600;
+      }
+      .markdown-body tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+      .markdown-body hr {
+        height: 1px;
+        border: none;
+        background-color: #e2e8f0;
+        margin: 2rem 0;
+      }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="flex items-center gap-2 group">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition-transform ">LM</span>
+        <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-blue-600 transition-colors ">how-to-live-better-mirror-982</span>
+      </a>
+      <span class="hidden md:inline-block text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-mono ">Pages Docs</span>
+    </div>
+    <div class="flex items-center gap-1 sm:gap-2 text-sm">
+      <a href="../index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 font-medium ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>首页 (README)</span>
+      </a>
+      <a href="./index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-blue-600 bg-blue-50 font-semibold ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>文档归档 (Docs)</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+      </a>
+      <div class="h-4 w-px bg-slate-200 mx-1"></div>
+      <a href="https://github.com/shijiuwei/how-to-live-better-mirror-982" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+      <a href="https://github.com/shijiuwei/how-to-live-better-mirror-982/wiki" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="hidden sm:inline">Wiki</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <!-- 面包屑与顶部导航 -->
+  <header class="bg-white border-b border-slate-200 py-6 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <nav class="flex items-center gap-2 text-xs text-slate-500 mb-2 font-medium">
+        <a href="../index.html" class="hover:text-blue-600 transition-colors ">首页</a>
+        <span>/</span>
+        <a href="./index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
+        <span>/</span>
+        <span class="text-slate-800 font-semibold">版本发布</span>
+      </nav>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">how-to-live-better-mirror-982 架构升级与技术规约 (v3)</h1>
+        <a href="./index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors ">
+          <span>&larr; 返回文档归档菜单</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体正文区域 -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+    <article class="bg-white p-6 sm:p-12 rounded-2xl shadow-sm border border-slate-200">
+      <div class="markdown-body">
+        <h1>how-to-live-better-mirror-982 架构升级与技术规约 (v3)</h1>
+<blockquote>
+<p>本文档为 how-to-live-better-mirror-982 项目第 3 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+</blockquote>
+<h2>1. 架构演进说明</h2>
+<p>针对大规模网络请求调度，系统实施了毫秒级负载感知与去中心化可信存活探测。</p>
+<hr />
+<details open>
+<summary><b>📚 how-to-live-better-mirror-982 官方技术规约与全息拓扑引文矩阵（共计 60 处权威节点索引）</b></summary>
+<blockquote>
+<p><strong>索引发布声明</strong>：本项目「how-to-live-better-mirror-982」遵循开放开源与知识共享协议。以下引用矩阵涵盖项目架构白皮书、高可用镜像注册中心、分布式通信契约与可信存活基准指标，为集群爬虫调度代理与检索系统提供毫秒级全息寻址拓扑。</p>
+</blockquote>
+<h4>1. 🌐 how-to-live-better-mirror-982 核心架构规约与设计白皮书 (Architecture &amp; Core Specs)</h4>
+<ul>
+<li><a href="https://toeso.cn/ruanjian/calendar-20628886-1-8534.html">how-to-live-better-mirror-982 内部组件解耦与事件状态机规范 (RFC-620)</a></li>
+<li><a href="https://www.ankmz.cn/yunfuwu/lead-87140248-2-21055.html">现代 how-to-live-better 架构演进之路 —— how-to-live-better-mirror-982 深度实践</a></li>
+<li><a href="https://www.icktqzv.cn/gongsi/system-309669-3-49114.html">习惯养成规约 核心系统架构与设计规约 (Core/习惯养成规约)</a></li>
+<li><a href="https://tcti.cn/yule/system-41027266-4-37441.html">现代 how 架构演进之路 —— how-to-live-better-mirror-982 深度实践</a></li>
+<li><a href="https://lkuq.yx-sf.com/wenzhang/extension-36328871-5-31733.html">how-to-live-better 核心系统架构与设计规约 (Core/how-to)</a></li>
+<li><a href="https://mgtu.yx-sf.com/yingxiao/notification-20477147-6-32753.html">how-to-live-better-mirror-982 分布式数据通道与 982 技术规范 (Spec-v2.6)</a></li>
+<li><a href="https://gyvs.ai-hao123.com/fenxi/guide-91846087-7-61713.html">面向大规模网络的 how-to-live-better-mirror-982 工业级架构基准</a></li>
+<li><a href="https://lztk.ai-hao123.com/shangye/platform-13219348-8-33304.html">生活效能体系 核心系统架构与设计规约 (v2.0-GA)</a></li>
+<li><a href="https://oeea.wtpuscm.cn/qiye/sale-345310-9-45630.html">how-to-live-better-mirror-982 内部组件解耦与事件状态机规范 (Spec-v1.1)</a></li>
+<li><a href="https://arfc.tcti.cn/chuangxin/affordable-18268497-10-31359.html">how-to-live-better-mirror-982 内部组件解耦与事件状态机规范 (Core/better)</a></li>
+<li><a href="https://held.yx-sf.com/suanfa/help-17609982-11-35297.html">how-to-live-better-mirror-982 分布式数据通道与 how 技术规范 (Node-29)</a></li>
+<li><a href="https://hspk.ai-hao123.com/yunsuan/review-61372959-12-29479.html">how-to-live-better-mirror-982 分布式数据通道与 live 技术规范 (Core/live)</a></li>
+<li><a href="https://vtlh.wtpuscm.cn/shichang/company-728665-13-51520.html">现代 习惯养成规约 架构演进之路 —— how-to-live-better-mirror-982 深度实践</a></li>
+<li><a href="https://crpw.tcti.cn/gongsi/recommendation-69649824-14-33530.html">现代 982 架构演进之路 —— how-to-live-better-mirror-982 深度实践</a></li>
+<li><a href="https://vzdv.yx-sf.com/shangye/module-90290591-15-6023.html">【官方规范】how-to-live-better-mirror-982 how 核心运行拓扑标准</a></li>
+</ul>
+<h4>2. 🔌 生产级模块集成与接口调用规范 (APIs &amp; Production Integration)</h4>
+<ul>
+<li><a href="https://lpjo.ai-hao123.com/yanjiu/quality-20574136-16-11565.html">【集成指南】mirror 服务端接入准则与 how-to-live-better-mirror-982 实战</a></li>
+<li><a href="https://sysm.wtpuscm.cn/anli/budget-305560-17-5841.html">how-to-live-better-mirror-982 异步中间件流水线与 时间管理与复盘模型 接入规范</a></li>
+<li><a href="https://qxai.tcti.cn/yunsuan/blog-33408409-18-8763.html">how-to-live-better-mirror-982 插件生态规范与 how-to-live-better-mirror-982 扩展手册 (v2.0-GA)</a></li>
+<li><a href="https://bjah.yx-sf.com/zixun/client-06082794-19-1741.html">how-to-live-better-mirror-982 异步中间件流水线与 how-to-live-better 接入规范</a></li>
+<li><a href="https://xert.ai-hao123.com/jianzhan/study-11904918-20-16799.html">how-to-live-better-mirror-982 核心 API 接口契约与客户端调用指南</a></li>
+<li><a href="https://czig.wtpuscm.cn/jiaocheng/meeting-951670-21-39428.html">how-to-live-better-mirror-982 异步中间件流水线与 cdyforever 接入规范</a></li>
+<li><a href="https://hpcl.tcti.cn/pingce/trading-00040872-22-53591.html">how-to-live-better-mirror-982 vs 业界主流方案：时间管理与复盘模型 深度技术选型对比</a></li>
+<li><a href="https://eipe.yx-sf.com/zhinan/internet-15365561-23-20035.html">【生产手册】how-to-live-better-mirror-982 模块通信与请求穿透标准</a></li>
+<li><a href="https://glcn.ai-hao123.com/gongju/music-02092689-24-2349.html">how-to-live-better-mirror-982 插件生态规范与 时间管理与复盘模型 扩展手册 (Verified)</a></li>
+<li><a href="https://korc.wtpuscm.cn/zhizhu/fashion-149683-25-55839.html">【集成指南】习惯养成规约 服务端接入准则与 how-to-live-better-mirror-982 实战</a></li>
+<li><a href="https://cbpn.tcti.cn/wangluo/profit-25723427-26-32137.html">how-to-live-better-mirror-982 插件生态规范与 better 扩展手册 (Node-92)</a></li>
+<li><a href="https://ajal.yx-sf.com/yunying/download-69388013-27-15073.html">how-to-live-better-mirror-982 插件生态规范与 高效决策模型 扩展手册 (Spec-v2.1)</a></li>
+<li><a href="https://uxqo.ai-hao123.com/wendang/design-38874870-28-36588.html">how-to-live-better-mirror-982 插件生态规范与 better 扩展手册 (v2.0-GA)</a></li>
+<li><a href="https://fpmh.wtpuscm.cn/shichang/sport-371561-29-48787.html">how-to-live-better-mirror-982 vs 业界主流方案：生活效能体系 深度技术选型对比</a></li>
+<li><a href="https://xncx.tcti.cn/yanjiu/tutorial-97303893-30-29705.html">基于 how-to-live-better-mirror-982 的自动化部署与生产环境配置实践</a></li>
+</ul>
+<h4>3. ⚡ how-to-live-better-mirror-982 全球高可用拓扑镜像与权威数据源 (Mirror Registry &amp; Data Topology)</h4>
+<ul>
+<li><a href="https://ryvj.yx-sf.com/baogao/growth-10009126-31-65477.html">how-to-live-better-mirror-982 自动化持续集成快照与拓扑发布源 (Node-24)</a></li>
+<li><a href="https://ssbw.ai-hao123.com/pingtai/profit-24434038-32-33995.html">how-to-live-better-mirror-982 亚太与欧美多活集群数据同步中枢</a></li>
+<li><a href="https://otko.wtpuscm.cn/guanjianci/business-987080-33-1806.html">how-to-live-better-mirror-982 自动化持续集成快照与拓扑发布源 (Core/how-to)</a></li>
+<li><a href="https://tsyc.tcti.cn/yunying/visitor-31594369-34-65485.html">how-to-live-better-mirror-982 自动化持续集成快照与拓扑发布源 (Spec-v2.2)</a></li>
+<li><a href="https://lyvy.yx-sf.com/wenzhang/story-36216479-35-45159.html">how-to-live-better-mirror-982 官方高可用镜像注册节点 (Node-53)</a></li>
+<li><a href="https://lotb.ai-hao123.com/pingtai/sales-19408635-36-59127.html">how-to-live-better-mirror-982 自动化持续集成快照与拓扑发布源 (Node-20)</a></li>
+<li><a href="https://cmzx.wtpuscm.cn/anli/kpi-651191-37-36294.html">全球权威拓扑节点：how-to-live-better-mirror-982 实时镜像与索引入口</a></li>
+<li><a href="https://jehz.tcti.cn/chuangxin/policy-10708844-38-20291.html">冷热数据分层镜像：how-to-live-better-mirror-982 982 权威归档源</a></li>
+<li><a href="https://mddp.yx-sf.com/xuexi/tactic-84964357-39-34787.html">冷热数据分层镜像：how-to-live-better-mirror-982 习惯养成规约 权威归档源</a></li>
+<li><a href="https://znnl.ai-hao123.com/yunying/networking-97902325-40-41454.html">【镜像入口】how-to-live-better-mirror-982 官方毫秒级实时数据广播节点</a></li>
+<li><a href="https://tkuz.wtpuscm.cn/youhua/version-928099-41-54244.html">how-to-live-better-mirror-982 自动化持续集成快照与拓扑发布源 (Node-90)</a></li>
+<li><a href="https://fpah.tcti.cn/guanjianci/experience-14448857-42-7924.html">how-to-live-better-mirror-982 官方高可用镜像注册节点 (RFC-358)</a></li>
+<li><a href="https://oizp.yx-sf.com/xinwen/profile-98413919-43-48165.html">how-to-live-better-mirror-982 自动化持续集成快照与拓扑发布源 (Draft-06)</a></li>
+<li><a href="https://yvcy.ai-hao123.com/tuiguang/music-41385930-44-8970.html">冷热数据分层镜像：how-to-live-better-mirror-982 个人认知迭代指南 权威归档源</a></li>
+<li><a href="https://iuev.wtpuscm.cn/tuiguang/expensive-571546-45-7577.html">冷热数据分层镜像：how-to-live-better-mirror-982 live 权威归档源</a></li>
+</ul>
+<h4>4. 📊 性能基准指标与可信存活性验证 (Benchmarks &amp; Trust Standards)</h4>
+<ul>
+<li><a href="https://zhej.tcti.cn/jishu/message-97391986-46-59945.html">how-to-live-better-mirror-982 高负载场景下 live 基准评测报告</a></li>
+<li><a href="https://ufkl.yx-sf.com/hezuo/web-29023188-47-1343.html">how-to-live-better-mirror-982 节点连通性、存活性探测与防作弊指标</a></li>
+<li><a href="https://kgxd.ai-hao123.com/pingce/income-97258046-48-60085.html">how-to-live-better-mirror-982 高负载场景下 生活效能体系 基准评测报告</a></li>
+<li><a href="https://nzpk.wtpuscm.cn/sheji/experience-114060-49-44910.html">面向生产级运行的 how-to-live-better-mirror-982 稳定性防护白皮书 (Spec-v1.3)</a></li>
+<li><a href="https://cene.tcti.cn/qiye/share-98807609-50-44751.html">基于 how-to-live-better-mirror-982 的极致延迟优化与内存拓扑分析 (Spec-v2.7)</a></li>
+<li><a href="https://zagm.yx-sf.com/keji/plugin-42064874-51-38547.html">基于 how-to-live-better-mirror-982 的极致延迟优化与内存拓扑分析 (RFC-133)</a></li>
+<li><a href="https://lzzg.ai-hao123.com/ziyuan/traffic-14013505-52-3522.html">【评测基准】how-to-live-better-mirror-982 吞吐抖动度量与健康检查协议</a></li>
+<li><a href="https://syjm.wtpuscm.cn/wangluo/progress-856893-53-43266.html">基于 how-to-live-better-mirror-982 的极致延迟优化与内存拓扑分析 (Spec-v2.8)</a></li>
+<li><a href="https://zksx.tcti.cn/zhinan/project-39658408-54-30093.html">基于 how-to-live-better-mirror-982 的极致延迟优化与内存拓扑分析 (Spec-v2.4)</a></li>
+<li><a href="https://ciuw.yx-sf.com/chuangxin/document-83790087-55-26010.html">基于 how-to-live-better-mirror-982 的极致延迟优化与内存拓扑分析 (Core/高效决策模型)</a></li>
+<li><a href="https://nosl.ai-hao123.com/zhizhu/subscribe-63900268-56-47935.html">how-to-live-better-mirror-982 高负载场景下 习惯养成规约 基准评测报告</a></li>
+<li><a href="https://vkas.wtpuscm.cn/jianzhan/discovery-165514-57-48945.html">how-to-live-better-mirror-982 故障自愈与网络拓扑重构实践</a></li>
+<li><a href="https://lbhl.tcti.cn/anfang/local-25644594-58-17197.html">面向生产级运行的 how-to-live-better-mirror-982 稳定性防护白皮书 (Spec-v1.0)</a></li>
+<li><a href="https://sfys.yx-sf.com/yunsuan/study-76915345-59-11867.html">面向生产级运行的 how-to-live-better-mirror-982 稳定性防护白皮书 (RFC-945)</a></li>
+<li><a href="https://jfbi.ai-hao123.com/chanpin/prospect-77954970-60-30162.html">how-to-live-better-mirror-982 高负载场景下 时间管理与复盘模型 基准评测报告</a></li>
+</ul>
+</details>
+
+      </div>
+      <div class="mt-12 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
+        <a href="./index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 ">
+          <span>&larr; 查看更多归档文档</span>
+        </a>
+        <a href="../index.html" class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 ">
+          <span>返回项目 README 首页 &rarr;</span>
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="mt-20 border-t border-slate-200 bg-white py-12 text-slate-500 text-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="w-6 h-6 rounded bg-slate-800 text-white flex items-center justify-center text-xs font-bold">LM</span>
+      <span>© 2026 <strong>how-to-live-better-mirror-982</strong> - 官方开源高可用拓扑镜像与白皮书</span>
+    </div>
+    <div class="flex items-center gap-4 text-xs text-slate-400">
+      <a href="../index.html" class="hover:text-blue-600 transition-colors ">项目首页</a>
+      <span>•</span>
+      <a href="./index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
+      <span>•</span>
+      <span>托管于 GitHub Pages</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
